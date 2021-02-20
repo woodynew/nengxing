@@ -1,0 +1,9 @@
+.idea
+.vscode
+.DS_Store
+*.swp
+*.swo
+beego.iml
+
+*.exe*
+lastupdate.tmp
