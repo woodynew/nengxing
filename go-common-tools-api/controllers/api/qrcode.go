@@ -2,6 +2,8 @@ package api
 
 import (
 	"fmt"
+	"go-common-tools-api/apihelpers"
+	"net/url"
 	"os"
 
 	"github.com/tuotoo/qrcode"
@@ -31,28 +33,35 @@ func (c *QrcodeController) URLMapping() {
 func (c *QrcodeController) DecodeFile() {
 	path := c.GetString("path")
 	fmt.Println(path)
+	// fmt.Println(url.QueryEscape(path))
+	// fmt.Println(url.QueryUnescape(path))
+	path, _ = url.QueryUnescape(path)
 
+	// "E%3A%2Fxampp%2Fhtdocs%2Flaravel%2Faliyun_code%2Ftelecom_emall%2Fdev%2Femall_api%2Fpublic%2Fwxfile%2Fxcxcode%2F321.jpg"
 	// file, err := os.Open("E:/xampp/htdocs/laravel/aliyun_code/telecom_emall/dev/emall_api/public/wxfile/xcxcode/321.jpg")
 	file, err := os.Open(path)
 	if err != nil {
 		fmt.Println(err)
+
+		c.ResultError(apihelpers.CODE_ERROR, "文件地址错误")
 		return
 	}
+
 	defer file.Close()
 	//识别二维码
 	qr, err := qrcode.Decode(file)
 	if err != nil {
 		fmt.Println(err.Error())
+		c.ResultError(apihelpers.CODE_ERROR, err.Error())
 		return
 	}
 	fmt.Println(qr.Content)
 
-	userInfo := map[string]string{
-		"username": "pprof.cn",
-		"password": "123456",
+	param := map[string]string{
+		"text": qr.Content,
 	}
-	c.Data["json"] = userInfo
-	c.ServeJSON()
+
+	c.ResultSuccess(param)
 }
 
 // Post ...
@@ -74,7 +83,6 @@ func (c *QrcodeController) Post() {
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *QrcodeController) GetOne() {
-	c.Html("aaaaaaa")
 }
 
 // GetAll ...

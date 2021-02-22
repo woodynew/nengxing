@@ -30,9 +30,6 @@ func init() {
 		),
 
 		beego.NSNamespace("/qrcode",
-			// beego.NSInclude(
-			// 	&controllers_api.QrcodeController{},
-			// ),
 			beego.NSRouter("/decode-file", &controllers_api.QrcodeController{}, "get,post:DecodeFile"),
 		),
 	)

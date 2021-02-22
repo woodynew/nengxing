@@ -1,6 +1,8 @@
 package api
 
 import (
+	"go-common-tools-api/apihelpers"
+
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -9,7 +11,12 @@ type BaseController struct {
 	beego.Controller
 }
 
-// html
-func (c *BaseController) Html(str string) {
-	c.Ctx.WriteString(str) //self.GetControllerAndAction()
+func (c *BaseController) ResultError(code int, msg string) {
+	c.Data["json"] = apihelpers.ResultCode(code, msg)
+	c.ServeJSON()
+}
+
+func (c *BaseController) ResultSuccess(param map[string]string) {
+	c.Data["json"] = apihelpers.ResultSuccess(param)
+	c.ServeJSON()
 }
