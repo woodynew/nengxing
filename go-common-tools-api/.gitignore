@@ -7,3 +7,5 @@ beego.iml
 
 *.exe*
 lastupdate.tmp
+
+go-common-tools-api
