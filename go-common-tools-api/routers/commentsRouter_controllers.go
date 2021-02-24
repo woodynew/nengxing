@@ -9,15 +9,6 @@ func init() {
 
     beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
         beego.ControllerComments{
-            Method: "DecodeFile",
-            Router: "/",
-            AllowHTTPMethods: []string{"decode-file"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
-        beego.ControllerComments{
             Method: "Post",
             Router: "/",
             AllowHTTPMethods: []string{"post"},
@@ -36,8 +27,8 @@ func init() {
 
     beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
         beego.ControllerComments{
-            Method: "GetOne",
-            Router: "/:id",
+            Method: "Get",
+            Router: "/:objectId",
             AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -46,7 +37,7 @@ func init() {
     beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
         beego.ControllerComments{
             Method: "Put",
-            Router: "/:id",
+            Router: "/:objectId",
             AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -55,8 +46,17 @@ func init() {
     beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
         beego.ControllerComments{
             Method: "Delete",
-            Router: "/:id",
+            Router: "/:objectId",
             AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"] = append(beego.GlobalControllerRouter["go-common-tools-api/controllers/api:QrcodeController"],
+        beego.ControllerComments{
+            Method: "DecodeFile",
+            Router: "/decode-file",
+            AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
